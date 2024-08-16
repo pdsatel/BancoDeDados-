@@ -1,0 +1,27 @@
+REATE DATABASE AulaDataPR;
+USE AulaDataPR;
+
+CREATE TABLE usuario(
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       username VARCHAR(50) NOT NULL,
+       password VARCHAR(20) NOT NULL
+);
+INSERT INTO usuario (username, password) VALUES ("rafael","12345678");
+INSERT INTO usuario (username, password) VALUES ("Mat","87654321");
+INSERT INTO usuario (username, password) VALUES ("Caio","12348765");
+INSERT INTO usuario (username, password) VALUES ("Lulu","87651234");
+INSERT INTO usuario (username, password) VALUES ("João","qwertyuiop");
+INSERT INTO usuario (username, password) VALUES ("Laercio","qawsedrftgyh");
+
+SELECT * FROM usuario;
+CREATE DATABASE AulaDataPR;
+USE AulaDataPR;
+
+CREATE TABLE usuario(
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       username VARCHAR(50) NOT NULL,
+       password VARCHAR(20) NOT NULL
+);
+INSERT INTO usuario (username, password) VALUES ("rafael","12345678");
+
+SELECT * FROM usuario;
