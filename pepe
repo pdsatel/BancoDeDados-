@@ -1,0 +1,34 @@
+CREATE DATABASE pedroteste2;
+USE pedroteste2;
+
+CREATE TABLE cadastro_hospedes(
+       id_hospede INT AUTO_INCREMENT PRIMARY KEY,
+       Nome_hospede VARCHAR(50) NOT NULL,
+       cpf_hospede INT(11	) NOT NULL,
+       email_cadastro VARCHAR(50)NOT NULL,
+       telefone INT (90) NOT NULL,
+       endereço_cadastro VARCHAR(999)NOT NULL
+       );
+CREATE TABLE agenda_hospedes(
+       data_da_hospede INT (8) NOT NULL,
+       tipo_da_hospedagem VARCHAR(50) NOT NULL,
+       valor_hospede INT(11	) NOT NULL,
+       email_cadastro VARCHAR(50)NOT NULL,
+       telefone INT (90) NOT NULL,
+       endereço_cadastro VARCHAR(999)NOT NULL
+       );
+CREATE TABLE forma_de_pagamento(
+		cartao_de_credito INT(16),
+        cartao_de_debito  INT(16),
+        dinheiro INT(255)
+        );
+CREATE TABLE   relatorio_final(
+	data_de_entrada INT (8) NOT NULL,
+	data_de_saida INT(8) NOT NULL,
+    receita INT(80),
+    taxa_de_ocupaçao INT(50)
+    );
+       
+	
+    
+	
