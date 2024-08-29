@@ -1,0 +1,75 @@
+CREATE DATABASE reserva_salas_laboratorios;
+USE reserva_salas_laboratorios;
+
+-- Tabela de Instituições
+CREATE TABLE instituicao (
+    id_instituicao INT AUTO_INCREMENT PRIMARY KEY,
+    nome_da_instituicao VARCHAR(60) NOT NULL,
+    unidade_da_instituicao VARCHAR(35) NOT NULL,
+    cidade_da_instituicao VARCHAR(35) NOT NULL,
+    coordenador_da_instituicao VARCHAR(90) NOT NULL,
+    UNIQUE (nome_da_instituicao, unidade_da_instituicao)
+);
+
+-- Tabela de Salas e Laboratórios
+CREATE TABLE sala (
+    id_sala INT AUTO_INCREMENT PRIMARY KEY,
+    bloco_da_sala VARCHAR(30) NOT NULL,
+    andar_da_sala INT NOT NULL,
+    tipo_da_sala ENUM('Sala de Aula', 'Laboratório') NOT NULL,
+    numero_da_sala INT NOT NULL,
+    numero_de_maquinas INT DEFAULT 0,  -- Somente para Laboratórios
+    numero_de_mesas INT NOT NULL,
+    numero_de_cadeiras INT NOT NULL,
+    possui_projetor BOOLEAN NOT NULL DEFAULT FALSE,
+    possui_computador BOOLEAN NOT NULL DEFAULT FALSE,
+    instituicao_id INT NOT NULL,
+    FOREIGN KEY (instituicao_id) REFERENCES instituicao(id_instituicao)
+);
+
+-- Tabela de Cursos Técnicos
+CREATE TABLE curso_tecnico (
+    id_curso INT AUTO_INCREMENT PRIMARY KEY,
+    nome_do_curso VARCHAR(70) NOT NULL,
+    tempo_de_curso INT NOT NULL,  -- Tempo do curso em horas ou outra unidade apropriada
+    coordenador_do_curso VARCHAR(50) NOT NULL
+);
+
+-- Tabela de Disciplinas
+CREATE TABLE disciplina (
+    id_disciplina INT AUTO_INCREMENT PRIMARY KEY,
+    nome_da_disciplina VARCHAR(80) NOT NULL,
+    professor_da_disciplina VARCHAR(60) NOT NULL,
+    tempo_da_disciplina INT  -- Tempo da disciplina em horas ou outra unidade apropriada
+);
+
+-- Tabela de Reservas
+CREATE TABLE reserva (
+    id_reserva INT AUTO_INCREMENT PRIMARY KEY,
+    sala_id INT NOT NULL,
+    curso_id INT NOT NULL,
+    disciplina_id INT NOT NULL,
+    professor VARCHAR(50) NOT NULL,
+    periodo ENUM('Manhã', 'Tarde', 'Noite') NOT NULL,
+    data_da_reserva DATETIME NOT NULL,
+    FOREIGN KEY (sala_id) REFERENCES sala(id_sala),
+    FOREIGN KEY (curso_id) REFERENCES curso_tecnico(id_curso),
+    FOREIGN KEY (disciplina_id) REFERENCES disciplina(id_disciplina)
+);
+
+-- Tabela de Manutenção
+CREATE TABLE manutencao (
+    id_manutencao INT AUTO_INCREMENT PRIMARY KEY,
+    sala_id INT NOT NULL,
+    problema_descrito TEXT NOT NULL,
+    data_do_problema DATETIME NOT NULL,
+    resolvido BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY (sala_id) REFERENCES sala(id_sala)
+);
+
+-- Tabela de Coordenadores
+CREATE TABLE coordenador (
+    id_coordenador INT AUTO_INCREMENT PRIMARY KEY,
+    nome_coordenador VARCHAR(50) NOT NULL,
+    email_coordenador VARCHAR(50) NOT NULL UNIQUE
+);
