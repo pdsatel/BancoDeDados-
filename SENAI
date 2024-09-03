@@ -1,5 +1,5 @@
 CREATE DATABASE reserva_salas245_;
-USE reserva_salas245_;
+USE reserva_salas245_; 
 
 -- Tabela de Coordenadores
 CREATE TABLE coordenador (
