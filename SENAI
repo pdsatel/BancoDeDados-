@@ -1,5 +1,12 @@
-CREATE DATABASE reserva_salas_laboratorios;
-USE reserva_salas_laboratorios;
+CREATE DATABASE reserva_salas245_;
+USE reserva_salas245_;
+
+-- Tabela de Coordenadores
+CREATE TABLE coordenador (
+    id_coordenador INT AUTO_INCREMENT PRIMARY KEY,
+    nome_coordenador VARCHAR(50) NOT NULL,
+    email_coordenador VARCHAR(50) NOT NULL UNIQUE
+);
 
 -- Tabela de Instituições
 CREATE TABLE instituicao (
@@ -66,15 +73,22 @@ CREATE TABLE aluno (
     FOREIGN KEY (semestre_id) REFERENCES semestre(id_semestre)
 );
 
--- Tabela de Frequência
-CREATE TABLE frequencia (
-    id_frequencia INT AUTO_INCREMENT PRIMARY KEY,
-    aluno_id INT NOT NULL,
-    reserva_id INT NOT NULL,
-    data_frequencia DATE NOT NULL,
-    status ENUM('Presente', 'Ausente') NOT NULL,
-    FOREIGN KEY (aluno_id) REFERENCES aluno(id_aluno),
-    FOREIGN KEY (reserva_id) REFERENCES reserva(id_reserva)
+-- Tabela de Professores
+CREATE TABLE professor (
+    id_professor INT AUTO_INCREMENT PRIMARY KEY,
+    nome_professor VARCHAR(50) NOT NULL,
+    email_professor VARCHAR(50) NOT NULL UNIQUE,
+    telefone_professor VARCHAR(15),
+    departamento VARCHAR(50)
+);
+
+-- Tabela de Disciplinas que o Professor Leciona
+CREATE TABLE professor_disciplina (
+    professor_id INT NOT NULL,
+    disciplina_id INT NOT NULL,
+    PRIMARY KEY (professor_id, disciplina_id),
+    FOREIGN KEY (professor_id) REFERENCES professor(id_professor),
+    FOREIGN KEY (disciplina_id) REFERENCES disciplina(id_disciplina)
 );
 
 -- Tabela de Reservas
@@ -92,6 +106,17 @@ CREATE TABLE reserva (
     FOREIGN KEY (professor_id) REFERENCES professor(id_professor)
 );
 
+-- Tabela de Frequência
+CREATE TABLE frequencia (
+    id_frequencia INT AUTO_INCREMENT PRIMARY KEY,
+    aluno_id INT NOT NULL,
+    reserva_id INT NOT NULL,
+    data_frequencia DATE NOT NULL,
+    status ENUM('Presente', 'Ausente') NOT NULL,
+    FOREIGN KEY (aluno_id) REFERENCES aluno(id_aluno),
+    FOREIGN KEY (reserva_id) REFERENCES reserva(id_reserva)
+);
+
 -- Tabela de Manutenção
 CREATE TABLE manutencao (
     id_manutencao INT AUTO_INCREMENT PRIMARY KEY,
@@ -101,31 +126,6 @@ CREATE TABLE manutencao (
     resolvido BOOLEAN NOT NULL DEFAULT FALSE,
     data_resolucao DATETIME,  -- Data em que o problema foi resolvido, se aplicável
     FOREIGN KEY (sala_id) REFERENCES sala(id_sala)
-);
-
--- Tabela de Coordenadores
-CREATE TABLE coordenador (
-    id_coordenador INT AUTO_INCREMENT PRIMARY KEY,
-    nome_coordenador VARCHAR(50) NOT NULL,
-    email_coordenador VARCHAR(50) NOT NULL UNIQUE
-);
-
--- Tabela de Professores
-CREATE TABLE professor (
-    id_professor INT AUTO_INCREMENT PRIMARY KEY,
-    nome_professor VARCHAR(50) NOT NULL,
-    email_professor VARCHAR(50) NOT NULL UNIQUE,
-    telefone_professor VARCHAR(15),
-    departamento VARCHAR(50)
-);
-
--- Tabela de Disciplinas que o Professor Leciona
-CREATE TABLE professor_disciplina (
-    professor_id INT NOT NULL,
-    disciplina_id INT NOT NULL,
-    PRIMARY KEY (professor_id, disciplina_id),
-    FOREIGN KEY (professor_id) REFERENCES professor(id_professor),
-    FOREIGN KEY (disciplina_id) REFERENCES disciplina(id_disciplina)
 );
 
 -- Tabela de Turmas
