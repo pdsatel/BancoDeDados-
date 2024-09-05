@@ -1,0 +1,37 @@
+CREATE DATABASE seguradora5;
+USE seguradora5;
+ 
+ CREATE TABLE Acidente (
+	id_acidente INT NOT NULL PRIMARY KEY auto_increment,
+    data_acidente date not null,
+    hora_acidente datetime not null
+    
+);
+ CREATE TABLE Apolice (
+id_apolice INT NOT NULL PRIMARY KEY,
+valor_apolice INT (45) NOT NULL
+ 
+);
+CREATE TABLE carro (
+	registro_carro INT NOT NULL PRIMARY KEY,
+    marca_do_carro VARCHAR (60) NOT NULL,
+    id_apolice int,
+    foreign key(id_apolice) references apolice(id_apolice),
+    id_acidente int,
+    foreign key(id_acidente) references Acidente(id_acidente)
+    
+);
+CREATE TABLE cliente (
+	cpf_cliente INT(11) NOT NULL PRIMARY KEY,
+    nome_cliente VARCHAR (60) NOT NULL,
+    enereço_cliente VARCHAR(60) NOT NULL,
+    telefone_cliente INT (15) NOT NULL,
+    registro_carro int,
+    foreign key(registro_carro) references carro(registro_carro)
+);
+insert into cliente (nome_cliente) values("pedro_satel");
+
+    
+    
+    
+ 
