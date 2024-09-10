@@ -1,37 +1,71 @@
-CREATE DATABASE seguradora5;
-USE seguradora5;
- 
- CREATE TABLE Acidente (
-	id_acidente INT NOT NULL PRIMARY KEY auto_increment,
-    data_acidente date not null,
-    hora_acidente datetime not null
-    
-);
- CREATE TABLE Apolice (
-id_apolice INT NOT NULL PRIMARY KEY,
-valor_apolice INT (45) NOT NULL
- 
-);
-CREATE TABLE carro (
-	registro_carro INT NOT NULL PRIMARY KEY,
-    marca_do_carro VARCHAR (60) NOT NULL,
-    id_apolice int,
-    foreign key(id_apolice) references apolice(id_apolice),
-    id_acidente int,
-    foreign key(id_acidente) references Acidente(id_acidente)
-    
-);
-CREATE TABLE cliente (
-	cpf_cliente INT(11) NOT NULL PRIMARY KEY,
-    nome_cliente VARCHAR (60) NOT NULL,
-    enereço_cliente VARCHAR(60) NOT NULL,
-    telefone_cliente INT (15) NOT NULL,
-    registro_carro int,
-    foreign key(registro_carro) references carro(registro_carro)
-);
-insert into cliente (nome_cliente) values("pedro_satel");
+CREATE DATABASE seguradora020255265;
+USE seguradora020255265;
 
-    
+
+-- Tabela Acidente
+CREATE TABLE Acidente (
+    id_acidente INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    data_acidente DATE NOT NULL,
+    hora_acidente DATETIME NOT NULL
+);
+
+-- Tabela Apolice
+CREATE TABLE Apolice (
+    id_apolice INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    valor_apolice DECIMAL(10, 2) NOT NULL -- Use DECIMAL para valores monetários
+);
+
+-- Tabela Carro
+CREATE TABLE Carro (
+    registro_carro INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    marca_do_carro VARCHAR(60) NOT NULL,
+    id_apolice INT,
+    FOREIGN KEY (id_apolice) REFERENCES Apolice(id_apolice),
+    id_acidente INT,
+    FOREIGN KEY (id_acidente) REFERENCES Acidente(id_acidente)
+);
+
+-- Tabela Cliente
+CREATE TABLE Cliente (
+    cpf_cliente VARCHAR(12) NOT NULL PRIMARY KEY,
+    nome_cliente VARCHAR(60) NOT NULL,
+    endereco_cliente VARCHAR(60) NOT NULL,
+    telefone_cliente VARCHAR(15) NOT NULL,
+    registro_carro INT,
+    FOREIGN KEY (registro_carro) REFERENCES Carro(registro_carro)
+);
+
+-- Inserção de dados
+-- Inserção de dados
+-- Inserção de dados com endereços e números diferentes
+-- Inserção de dados com cpf_cliente como números inteiros
+INSERT INTO Cliente (cpf_cliente, nome_cliente, endereco_cliente, telefone_cliente) VALUES
+(12345678905, 'Davi', 'Rua das Flores, 123', '(11) 98765-4321'),
+(12345678904, 'Nicolas', 'Avenida Brasil, 456', '(11) 98765-1234'),
+(12345678903, 'Gustavo', 'Rua da Liberdade, 789', '(11) 98765-5678'),
+(12345678902, 'Bruno', 'Rua das Palmeiras, 101', '(11) 98765-8765'),
+(12345678901, 'Diogo', 'Avenida Central, 202', '(11) 98765-4322'),
+(12345678906, 'Cris', 'Rua São Jorge, 303', '(11) 98765-3456'),
+(12345678907, 'Matheus', 'Praça da Sé, 404', '(11) 98765-6543'),
+(12345678908, 'Arruda', 'Rua do Comércio, 505', '(11) 98765-7890'),
+(12345678909, 'David Queiroz', 'Avenida dos Trabalhadores, 606', '(11) 98765-0987'),
+(12345678910, 'Julia', 'Rua da Alegria, 707', '(11) 98765-1122'),
+(12345678956, 'Manu', 'Rua dos Cedros, 808', '(11) 98765-3344'),
+(12345678977, 'Vitor', 'Avenida das Nações, 909', '(11) 98765-5566'),
+(12345678988, 'Miguel', 'Rua do Sol, 1010', '(11) 98765-7788'),
+(12345678999, 'Matheus Castellano', 'Rua da Esperança, 1111', '(11) 98765-9900'),
+(12345678970, 'Matheus', 'Avenida do Futuro, 1212', '(11) 98765-2233');
+
+
+
+
+select * from Cliente;
+
+ 
+
+
+
+
     
     
  
