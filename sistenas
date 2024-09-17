@@ -1,0 +1,34 @@
+-- Criação do banco de dados e seleção
+CREATE DATABASE sistema699;
+USE sistema699;
+
+-- Criação da tabela cad_cidade
+CREATE TABLE cad_cidade (
+    codigo INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(58),
+    uf VARCHAR(2)
+);
+
+-- Inserção dos dados na tabela cad_cidade
+INSERT INTO cad_cidade (nome, uf) VALUES 
+    ('São Paulo', 'SP'),
+    ('Uberlandia', 'SP'),
+    ('Belo horizonte', 'MG'),
+    ('Uberlandia (Regional)', 'MG'),
+    ('Curitiba', 'PR'),
+    ('Maringa', 'PR');
+s
+-- Seleção de todos os registros da tabela cad_cidade
+SELECT * FROM cad_cidade;
+describe cad_cidade;
+
+alter table cad_cidade rename cidade;
+select *from cidade; 
+select* from cidade 
+
+
+
+create table funcionario (
+nome varchar (70),
+endereço varchar(999),
+ s
